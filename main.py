@@ -2,6 +2,7 @@
 import cubeModule
 import crossModule
 import cube_info
+import crossBruteForce
 
 def main():
 	cube1 = cubeModule.Cube();
@@ -10,11 +11,11 @@ def main():
 	while (exit == False):
 		print("\n\nMenu:")
 		print("1 - permutate cube")
-		#print("2 - solve cube")
-		print("2 - scramble cube")
-		print("3 - show cube")
-		print("4 - reset cube")
-		print("5 - exit")
+		print("2 - solve cube")
+		print("3 - scramble cube")
+		print("4 - show cube")
+		print("5 - reset cube")
+		print("6 - exit")
 		
 		# obtain user input
 		sel = input(">> ")
@@ -44,11 +45,12 @@ def main():
 			
 				
 			
-		#elif (sel == 2):
-		#	print("solving...")
-		#	crossModule.solveCross(5, cube1)
-		
 		elif (sel == 2):
+			print("solving...")
+			cross_sol = crossBruteForce.forceCross(cube1)
+			print("cross:", cross_sol)
+		
+		elif (sel == 3):
 			scr_length = input("enter scramble length: ")
 			try:
 				scr_perm = cube1.scramble(int(scr_length))
@@ -59,7 +61,7 @@ def main():
 			except TypeError:
 				print("must enter integer!")
 			
-		elif (sel == 3):
+		elif (sel == 4):
 			if cube1.checkState():
 				state = "solved"
 			else:
@@ -68,11 +70,11 @@ def main():
 			print("note: 0=white, 1=orange, 2=green, 3=red, 4=blue, 5=yellow") 
 			cube1.show()
 			
-		elif (sel == 4):
+		elif (sel == 5):
 			cube1.reset()
 			print("\ncube reset...")
 			
-		elif (sel == 5):
+		elif (sel == 6):
 			print("exit")
 			exit = True;
 			

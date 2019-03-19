@@ -119,7 +119,7 @@ class Cube:
 			
 			i += 1
 		
-		print(p)
+		#print(p)
 			
 		return p
 		
@@ -180,13 +180,13 @@ class Cube:
 			for k in range(len(cycle)):
 				cycle[k].reverse()
 
-		print("cycle", cycle)
+		#print("cycle", cycle)
 		
 		# rotate layer twice if double specified
 		for i in range(0, len(cycle)):
 			for j in range(0,len(cycle[i])):
 				target = (j+1+dir[2])%4 	# (j == 3) ? 4 : (j+1)%4
-				print('cube pos', cycle[i][j], 'target pos', cycle[i][target])
+				#print('cube pos', cycle[i][j], 'target pos', cycle[i][target])
 				
 				z = current[(cycle[i][target])]
 				buffer[cycle[i][j]] = z
