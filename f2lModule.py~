@@ -19,4 +19,4 @@ f2l_alg = [
         [uRurU2Rur],[URUrU2RUr],[U2RurufuF],[uRUrU2fuFuFrfR],[RurfU2F],[RUruRUruRUr],
 	
 	# Case 6: (37-41) corner bottom layer, edge middle layer
-        [RuruRUrU2Rur],[RUrU2RurURUr],[fUFU2RUR2FRf],[RurU2fuF2rfR],[rFRfRurURurU2Rur]]
+        [RuruRUrU2Rur],[RUrU2RurURUr],[fUFU2RUR2FRf],[
