@@ -1,3 +1,5 @@
+# Currently in progress
+
 import cube_info
 import cubeModule
 
@@ -104,8 +106,7 @@ def updateCross(pos, target, permutation):
 	
 	# return updated pos and target
 	return tmp_cube.index('pos'), tmp_cube.index('tar')
-	
-	
+		
 			
 
 def solveCross(color, cube_in_orig):
