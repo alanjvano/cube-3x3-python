@@ -69,7 +69,7 @@ Therefore, each face turn can be described by five four-mode cycle permutations 
 * b: [[36,38,44,42], [37,41,43,39], [2,9,51,35],   [1,12,52,32],  [0,15,53,29]]
 * d: [[45,47,53,51], [46,50,52,51], [24,33,42,15], [25,34,43,16], [26,35,44,17]]
 
-The Cube.js prototype class is used to define a cube as an object.  This class handle basic cube manipulations including:
+The Cube class is used to define a cube as an object.  This class handle basic cube manipulations including:
 * perm() - this method accepts an input permutation sequence from the user and performs the permutations on the cube in order
 * checkState() - this method tests to see if the cube is in a solved state
 * show() - displays cube in 2d format on canvas
