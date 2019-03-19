@@ -34,20 +34,16 @@ def main():
 			print("use upper case for clockwise, lower case for counter clockwise")
 			print("use 2 for double turn")
 			print("e.x.  f2UldSm2")
-			perm_exit = False
-			while perm_exit != True:
-				seq = input("\n\nenter permutation sequence:")
-				print("\n")
-				if cube1.perm(seq) == False:
-					perm_exit = True
-					
-				print("\nto exit, enter 1...")
-			
+			seq = input("\n\nenter permutation sequence:")
+
+			if cube1.perm(seq) == False:
+				perm_exit = True			
 				
 			
 		elif (sel == 2):
 			print("solving...")
 			cross_sol = crossBruteForce.forceCross(cube1)
+			print
 			print("cross:", cross_sol)
 		
 		elif (sel == 3):

@@ -5,17 +5,19 @@
 import cubeModule
 import cube_info
 import copy
+import time
 
-poss_turn = ['u','l','f','r','b','d','m','e','s',
-			'U','L','F','R','B','D','M','E','S',
-			'u2','l2','f2','r2','b2','d2','m2','e2','s2']
+poss_turn = ['u','l','f','r','b','d',
+			'U','L','F','R','B','D',
+			'u2','l2','f2','r2','b2','d2']
 			
 def forceCross(cube_in):
+	start_time = time.time()
 	cube2 = cubeModule.Cube()
 	orig = cubeModule.Cube()
 	orig.cube = copy.deepcopy(cube_in.cube)
 	cube2.cube = copy.deepcopy(cube_in.cube)
-	cube2.show()
+	#cube2.show()
 	for length in range(5):
 		iteration = [i for i in poss_turn]
 		for j in range(length):
@@ -26,6 +28,18 @@ def forceCross(cube_in):
 			#print(iteration[k])
 			cube2.perm(iteration[k])
 			#print(cube_in.checkState())
-			if cube2.checkState():
+			if checkCross(cube2.cube):
+				print("--- %s seconds ---" % (time.time() - start_time))
 				return iteration[k]
+			
+def checkCross(cube):
+	slve = True;
+	for i in [46, 48, 50, 52]:
+		if cube[i] != 5:
+			return False
+	if (cube[16] != 1 or cube[25] != 2 or cube[34] != 3 or cube[43] != 4):
+		return False
+	return True
+			
+			
 			
