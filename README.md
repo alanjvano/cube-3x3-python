@@ -43,10 +43,12 @@ Here, the faces are represented by
 The cube visualized as follows, where each values represents the cube object's corresponding array indice:
 
 -|U|-|-
+:-----:|:-----:|:-----:|:-----:
 L|F|R|B
 -|D|-|-
 
 -|-|-|0|1|2|-|-|-|-|-|-
+:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
 -|-|-|3|4|5|-|-|-|-|-|-
 -|-|-|6|7|8|-|-|-|-|-|-
 9|10|11|18|19|20|27|28|29|36|37|38
