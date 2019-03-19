@@ -1,6 +1,10 @@
 import math
 import random
+import copy
+
 import cube_info
+
+perms = copy.deepcopy(cube_info.perms)
 
 class Cube:
 
@@ -10,8 +14,6 @@ class Cube:
 		self.cube = [None] * 54
 		self.state = True
 		self.sol = []
-		self.cols = 12
-		self.rows = 9;
 		
 		for i in range(0,6):
 			for j in range (0,9):
@@ -31,7 +33,7 @@ class Cube:
 	
 	def scramble(self, scr_len):
 		# randomly select face permutation from valid list
-		valid = cube_info.valid_perm
+		valid = copy.deepcopy(cube_info.valid_perm)
 		scr = []
 		
 		for i in range(0, scr_len):
@@ -43,11 +45,12 @@ class Cube:
 			
 			# choose random valid permutation and add to permutation list
 			tmp = math.floor(random.random()*(len(valid)))
+			print("random", tmp)
 			scr.append(valid[tmp])
-			prev = valid[tmp]
+			prev = valid[tmp]	
 
 			# pick random direction: clockwise, counterclockwise, or double
-			tmp = math.floor(random.random()*2)
+			tmp = math.floor(random.random()*3)
 			if tmp == 0:
 				scr[len(scr)-1] = scr[len(scr)-1].upper()
 			elif tmp == 1:
@@ -56,10 +59,15 @@ class Cube:
 				scr[len(scr)-1] = scr[len(scr)-1].lower()
 
 			# reset permutaion list
-			valid = cube_info.valid_perm			
+			valid = copy.deepcopy(cube_info.valid_perm)
+			#print(valid)
 
 		scr = ''.join(scr)
+		#scr_out = self.splitPerm(scr)
 		print("scramble", scr)
+		#print("scramble:", end='')
+		#for i in range(len(scr)):
+		#	print(scr[i][0] + "-", end='')
 		return scr
 		
 
@@ -78,7 +86,7 @@ class Cube:
 		for i in range(len(per),0,-1):
 			# reverse order
 			print(per[i])
-			inverse[len(per)-i] = per[i-1]
+			inverse[len(per)-i] = copy.deepcopy(per[i-1])
 			# reverse direction
 			inverse[len(per)-i][1] = not (per[i-1][1])
 
@@ -89,9 +97,12 @@ class Cube:
 # split permutation sequence into individual chars and push them to array
 	def splitPerm(self, p_str):
 		p = []
-		for i in range(0,len(p_str)):
-			
+		#print("len",len(p_str))
+		i = 0
+		while i < len(p_str):
+					
 			# if single turn
+			#print("test", p_str[(i+1) % len(p_str)])
 			if (p_str[(i+1) % len(p_str)] != '2'):
 				# check upper case
 				tmp = (p_str[i] == p_str[i].upper())
@@ -101,29 +112,35 @@ class Cube:
 				
 			# if double turn, then add next character as well
 			# and increment counter
+			
 			else:
 				p.append([p_str[i].lower(), 1, 1])
 				i += 1
-				
-		print('p', p)
-
+			
+			i += 1
+		
+		print(p)
+			
 		return p
 		
 		
 	def perm(self, p_str):
 	
 		p = self.splitPerm(p_str)
+		
+		#print(p)
 
 		# check for invalid input
 		for i in range(0,len(p)):
+			#print("check", p[i][0])
 			if (p[i][0] not in cube_info.valid_perm and p[i][0] not in cube_info.valid_rot):
 				print("not valid input")
-				return false
+				return False
 	
 		# implement turn sequence in order	
 		for each in p:
 		
-			print(each)			
+			#print(each)			
 
 			# implement single turn
 			if (each[0] in cube_info.valid_perm):
@@ -136,7 +153,7 @@ class Cube:
 
 	def rotate(self, dir):
 		# def buffer cycle to adjust
-		cycle = rots[dir[0]]
+		cycle = copy.deepcopy(cube_info.rots[dir[0]])
 
 		# flip direction if necessary
 		if (dir[1] == 0 and dir[2] == 0):
@@ -154,29 +171,26 @@ class Cube:
 		
 
 	def turn(self, dir):
-		current = self.cube
-		buffer = current
-		cycle = cube_info.perms[dir[0]]  # choose permutation cycle
+		current = copy.deepcopy(self.cube)	
+		buffer = copy.deepcopy(current)
+		cycle = copy.deepcopy(perms[dir[0]])	# choose permutation cycle
 
-		print("current", current)
-		
 		# for clockwise direction reverse permutation cycles
-		if dir[1] == 1:
-			for k in range(0,len(cycle)):
-				cycle[k] = cycle[k].reverse()
+		if dir[1] == True:
+			for k in range(len(cycle)):
+				cycle[k].reverse()
 
 		print("cycle", cycle)
 		
 		# rotate layer twice if double specified
 		for i in range(0, len(cycle)):
-			for j in range(0,len(cycle)):
+			for j in range(0,len(cycle[i])):
 				target = (j+1+dir[2])%4 	# (j == 3) ? 4 : (j+1)%4
 				print('cube pos', cycle[i][j], 'target pos', cycle[i][target])
 				
 				z = current[(cycle[i][target])]
 				buffer[cycle[i][j]] = z
 					
-		print(buffer)
 		return buffer
 		
 
@@ -184,36 +198,36 @@ class Cube:
 		#print(self.cube)
 		
 		# show cube as grid
-		grid = [None]*self.cols
-		for i in range(0,self.cols):
-			grid[i] = ['-']*self.rows
+		grid = [None]*cube_info.rows
+		for i in range(len(grid)):
+			grid[i] = ['-']*cube_info.cols
 		
 		# define grid
-		for i in range(0,len(self.cube)):
+		for i in range(len(self.cube)):
 			# face 0 - up
 			if i < 9:
-				grid[i%3+3][math.floor(i/3)] = self.cube[i]
+				grid[math.floor(i/3)][i%3+3] = self.cube[i]
 				
 			# face 1 - left
 			elif i < 18:
-				grid[i%3][math.floor(i/3)] = self.cube[i]
+				grid[math.floor(i/3)][i%3] = self.cube[i]
 			
 			# face 2 - front
 			elif i < 27:
-				grid[i%3+3][math.floor(i/3)-3] = self.cube[i]
+				grid[math.floor(i/3)-3][i%3+3] = self.cube[i]
 				
 			# face 3 - right
 			elif i < 36:
-				grid[i%3+6][math.floor(i/3)-6] = self.cube[i]
+				grid[math.floor(i/3)-6][i%3+6] = self.cube[i]
 			
 			# face 4 - back
 			elif i < 45:
-				grid[i%3+9][math.floor(i/3)-9] = self.cube[i]
+				grid[math.floor(i/3)-9][i%3+9] = self.cube[i]
 			
 			# face 5 - down
 			elif i < 54:
-				grid[i%3+3][math.floor(i/3)-9] = self.cube[i]
-
+				grid[math.floor(i/3)-9][i%3+3] = self.cube[i]
+			
 		# show grid
 		print('\n'.join(['\t'.join([str(cell) for cell in row]) for row in grid])) 
 				

@@ -31,3 +31,9 @@ edges =  [[1,37],[3,10],[5,28],[7,19],      #top slice
 
 # define opposite faces
 faces = [[0,5],[1,3],[2,4]]
+
+# define solved state
+solved = [None]*54
+for i in range(6):
+	for j in range(9):
+		solved[i*9+j]=i
