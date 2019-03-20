@@ -46,12 +46,12 @@ def main():
 		elif (sel == 2):
 			print("solving...")
 			cross_sol = crossBruteForce.forceCross(cube1)
-			print
-			print("cross:", cross_sol)
 			solved_cube = cubeModule.Cube()
 			solved_cube = copy.deepcopy(cube1)
 			solved_cube.perm(cross_sol, True)
-			f2l_sol = f2lModule.solveF2l(solved_cube)
+			solved_cube = f2lModule.solveF2l(solved_cube)
+			print("cross:", cross_sol)
+			#print("solution",solved_cube.sl)
 		
 		elif (sel == 3):
 			scr_length = input("enter scramble length: ")

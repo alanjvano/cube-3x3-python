@@ -48,7 +48,7 @@ def solveF2l(cube_in):
 	
 	for i in range(4):
 		
-		tmp_cube.show()
+		#tmp_cube.show()
 		
 		# set colors for pair based on cube position
 		edge_color = tmp_cube.cube[22]
@@ -128,16 +128,18 @@ def solveF2l(cube_in):
 		count = 0
 		
 		while found == False and count < 4:
-			if corner_pos != 47 and edge_pos != 23:
+			if corner_pos == 47 and edge_pos == 23:
+				print("pair already solved")
+				found = True
+				
+			if found == False:
 				for pos in range(len(f2l_pos)):
 					#print("pos", f2l_pos[pos])
 					if corner_pos == f2l_pos[pos][0] and edge_pos == f2l_pos[pos][1]:
 						print("found algorithm", pos)
-						print(f2l_alg[pos])
+						#print(f2l_alg[pos])
 						tmp_cube.perm(f2l_alg[pos], True)
 						found = True
-			else:
-				print("pair already solved")
 
 			if found == False:
 				tmp_cube.perm('U', True)
@@ -154,11 +156,11 @@ def solveF2l(cube_in):
 		tmp_cube.perm('Y', True)
 		print("\n\n")
 	
-	print("solution",tmp_cube.sol)
+	print("f2l:",tmp_cube.sol)
 
 def findCornerPos(tmp_cube, edge_color, side_color, corner_color):
 
-	print("colors",edge_color, side_color, corner_color)
+	#print("colors",edge_color, side_color, corner_color)
 
 	for triple in cube_info.corners:
 
@@ -167,20 +169,20 @@ def findCornerPos(tmp_cube, edge_color, side_color, corner_color):
 		for j in range(len(triple)):
 			tmp_triple.append(tmp_cube.cube[triple[j]]) 
 		
-		print("triple", triple)
-		print("tmp_triple",tmp_triple)
+		#print("triple", triple)
+		#print("tmp_triple",tmp_triple)
 
 		if edge_color in tmp_triple:
-			print("color1",edge_color)
+			#print("color1",edge_color)
 			if side_color in tmp_triple:
-				print("color2",side_color)
+				#print("color2",side_color)
 				if corner_color in tmp_triple:
-					print("color3",corner_color)
+					#print("color3",corner_color)
 					for color in tmp_triple:
 
 						# if all three colors of corner are in corner piece, set it to the current corner position
 						if color == corner_color:
-							print("match color",color)
+							#print("match color",color)
 							
 							return triple[tmp_triple.index(corner_color)]
 
