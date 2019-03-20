@@ -44,7 +44,7 @@ f2l_pos = [
 def solveF2l(cube_in):
 	tmp_cube = cubeModule.Cube()
 	tmp_cube.cube = copy.deepcopy(cube_in.cube)
-	f2l_solution = []
+	#f2l_solution = []
 	
 	for i in range(4):
 		
@@ -157,6 +157,7 @@ def solveF2l(cube_in):
 		print("\n\n")
 	
 	print("f2l:",tmp_cube.sol)
+	return tmp_cube.sol, tmp_cube
 
 def findCornerPos(tmp_cube, edge_color, side_color, corner_color):
 
