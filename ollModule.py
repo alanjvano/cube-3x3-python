@@ -18,7 +18,7 @@ oll_alg = ['RU2R2FRfU2rFRf','FRUrufFSRUrufs','mUrMU2RmUrUr2rM','rU2XrURuYrurUrF'
 		'LFlURurURurLfl','RUrumURurM']
 		
 # define positions of upper color pieces to match with oll case
-oll_pos = [[4,37,19,9,10,11,36,37,38],[4,9,10,11,19,20,28,36,37],
+oll_pos = [[4,37,19,9,10,11,27,28,29],[4,9,10,11,19,20,28,36,37],
 		[4,2,37,38,28,19,20,10,11],[4,2,37,27,28,18,19,9,10],
 		[4,5,7,8,37,38,28,10,11],[3,4,6,7,9,36,37,27,28],
 		[1,3,4,6,38,28,29,19,20],[1,4,5,8,18,19,9,10,36],
@@ -73,12 +73,15 @@ def solveOLL(cube_in):
 		# first check if already solved
 		if orient != [0,1,2,3,4,5,6,7,8]:
 			for pattern in range(len(oll_pos)):
+				print(oll_pos[pattern])
 				count = 0
 				for each in orient:
+					print(each)
 					if each in oll_pos[pattern]:
 						count += 1
 				if count == 9:
 					#oll_sol = oll_alg[pattern]
+					print("success")
 					tmp_cube.perm(oll_alg[pattern], True)
 					found = True
 					continue
