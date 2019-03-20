@@ -9,7 +9,7 @@ oll_alg = ['RU2R2FRfU2rFRf','FRUrufFSRUrufs','mUrMU2RmUrUr2rM','rU2XrURuYrurUrF'
 		'RuruRurU2fUFuRUr','FRUrufUFRUruf','FURuR2fRURur','rFRUrfRyRur','rMuRmruRUrMuRm',
 		'LMUlmLUluLMulm','RUrUrFRfU2rFRf','RU2R2FRfU2mURurM','rU2FRUruyR2U2RB','R2U2rF2U2R2fR2U2F2RU2R2u',
 		'RUrURurURU2r','RU2R2uR2uR2U2R','R2dRU2rDRU2R','LFrflFRf','rflFRfLF',
-		'rULuRUl','RUrURU2r','FRUrufU2FRUruf','MURUrurFRfm','R2UrbRuR2URBr',
+		'U2ruRurU2R','RUrURU2r','FRUrufU2FRUruf','MURUrurFRfm','R2UrbRuR2URBr',
 		'luBULulbL','RUburURBr','RUrurFRf','RUR2urFRURuf','RU2R2FRfRU2r',
 		'ruRurURURYrfR','RbrBUBub','LUlULululBLb','LfluLUFul','rFRUrufUR',
 		'RurU2RUYRuryur','ruRUFRUrurURuf','burURB','FSRUrufs','FRUruf',
@@ -54,10 +54,10 @@ oll_pos = [[4,37,19,9,10,11,27,28,29],[4,9,10,11,19,20,28,36,37],
 		[0,2,3,4,5,6,8,19,37]]
 		
 def solveOLL(cube_in):
-	print(cube_in)
+	#print(cube_in)
 	tmp_cube = cubeModule.Cube()
 	tmp_cube.cube = copy.deepcopy(cube_in.cube)
-	print(tmp_cube)
+	#print(tmp_cube)
 	
 	# loop through all possible oll cases for each of the four positions of the top layer
 	found = False
@@ -68,20 +68,20 @@ def solveOLL(cube_in):
 		for i in [0,1,2,3,4,5,6,7,8,9,10,11,18,19,20,27,28,29,36,37,38]:
 			if tmp_cube.cube[i] == top_color:
 				orient.append(i)
-		print("orient",orient)
+		#print("orient",orient)
 		
 		# first check if already solved
 		if orient != [0,1,2,3,4,5,6,7,8]:
 			for pattern in range(len(oll_pos)):
-				print(oll_pos[pattern])
+				#print(oll_pos[pattern])
 				count = 0
 				for each in orient:
-					print(each)
+					#print(each)
 					if each in oll_pos[pattern]:
 						count += 1
 				if count == 9:
 					#oll_sol = oll_alg[pattern]
-					print("success")
+					#print("success")
 					tmp_cube.perm(oll_alg[pattern], True)
 					found = True
 					continue

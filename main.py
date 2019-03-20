@@ -5,6 +5,7 @@ import cube_info
 import crossBruteForce
 import f2lModule
 import ollModule
+import pllModule
 
 import copy
 
@@ -60,10 +61,21 @@ def main():
 			# solve OLL
 			oll_sol, solved_cube = ollModule.solveOLL(solved_cube)
 			
+			# solve PLL
+			pll_sol, solved_cube = pllModule.solvePLL(solved_cube)
+			
+			# adjust the last layer to the correct position (auf)
+			auf_sol = []
+			while solved_cube.checkState() == False:
+				solved_cube.perm('U', True)
+				auf_sol.append('U')
+			
 			print("\n\nSolution:")
 			print("cross:", cross_sol)
 			print("f2l:", f2l_sol)
 			print("oll:", oll_sol)
+			print("pll:",pll_sol)
+			#print("auf:", auf_sol)
 			#print("solution",solved_cube.sl)
 			
 		

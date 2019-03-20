@@ -155,8 +155,11 @@ def solveF2l(cube_in):
 		#tmp_cube.show()
 		tmp_cube.perm('Y', True)
 		print("\n\n")
+		
+	if tmp_cube.sol == ['Y','Y','Y','Y']:
+		tmp_cube.sol = []
 	
-	print("f2l:",tmp_cube.sol)
+	#print("f2l:",tmp_cube.sol)
 	return tmp_cube.sol, tmp_cube
 
 def findCornerPos(tmp_cube, edge_color, side_color, corner_color):

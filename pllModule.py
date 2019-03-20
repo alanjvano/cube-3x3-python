@@ -2,9 +2,10 @@ import cube_info
 import cubeModule
 
 import copy
+import math
 
 # define pll algorithms
-oll_alg = ['M2UM2U2M2UM2','R2uruRURURuR','rUrururURUR2','M2MU2M2U2MUM2','rFrB2RfrB2R2',
+pll_alg = ['M2UM2U2M2UM2','R2uruRURURuR','rUrururURUR2','M2MU2M2U2MUM2','rFrB2RfrB2R2',
 		'RbRF2rBRF2R2','rUlD2LuRlUrD2RuL','rURuR2fuFURFrfR2','FLU2rkyrUlU2RuL','ruRUdR2UrURuRuR2D',
 		'luLULuflulULFuLU2l','Y2RUrF2dLulUldF2U2','lUrU2LuRUlUrU2LuR','RUrfRUrurFR2uru','LuRU2lUrLuRu2lUr',
 		'rUlU2RuLrUlU2RuL','RU2rU2bruRURBR2U','rU2RU2rFRUrurfR2','RUrurFR2uruRUrf','rUrubrB2ubUbRBR',
@@ -33,42 +34,57 @@ pll_pos = [[[9,11,28],[10,27,29],[18,20,37],[19,36,38]],
 		[[9,29,37],[10,11,27],[18,19,38],[20,28,36]],
 		[[9,28,29],[10,20,36],[11,27,37],[18,19,38]]]
 		
-def solveOLL(cube_in):
-	print(cube_in)
+def solvePLL(cube_in):
+	#print(cube_in)
 	tmp_cube = cubeModule.Cube()
 	tmp_cube.cube = copy.deepcopy(cube_in.cube)
-	print(tmp_cube)
+	#print(tmp_cube)
 	
-	# loop through all possible oll cases for each of the four positions of the top layer
+	# loop through all possible pll cases for each of the four positions of the top layer
 	found = False
 	top_color = tmp_cube.cube[4]
 	while found == False:
+	
+		#tmp_cube.show()
 		
-		orient = []
-		for i in [0,1,2,3,4,5,6,7,8,9,10,11,18,19,20,27,28,29,36,37,38]:
-			if tmp_cube.cube[i] == top_color:
-				orient.append(i)
-		print("orient",orient)
+		# create 2-d array to represent current state of top layer
+		possible_pos = [9,10,11,18,19,20,27,28,29,36,37,38]
+		current = []
+		for index in range(len(possible_pos)):
+			#print("index",possible_pos[index],"color",tmp_cube.cube[possible_pos[index]])
+			current.append(tmp_cube.cube[possible_pos[index]])
 		
-		# first check if already solved
-		if orient != [0,1,2,3,4,5,6,7,8]:
-			for pattern in range(len(oll_pos)):
-				print(oll_pos[pattern])
+		#print(current)
+			
+		# first check is already solved
+		if current == [1,1,1,2,2,2,3,3,3,4,4,4]:
+			pll_sol = []
+			found = True
+		
+		# see if the corresponding position lists match
+		if found == False:
+			for index in range(len(pll_pos)):
+				#print(pll_pos[index])
 				count = 0
-				for each in orient:
-					print(each)
-					if each in oll_pos[pattern]:
+				for each in pll_pos[index]:
+					#print(each)
+					each_color = []
+					for j in range(len(each)):
+						each_color.append(tmp_cube.cube[each[j]])
+					#print(each_color)
+					
+					# check if all elements are equal
+					if each_color.count(each_color[0]) == len(each_color):
 						count += 1
-				if count == 9:
-					#oll_sol = oll_alg[pattern]
-					print("success")
-					tmp_cube.perm(oll_alg[pattern], True)
+				
+				# see if its a match
+				if count == 4:
+					#print("success")
+					#print(pll_pos[index])
+					tmp_cube.perm(pll_alg[index], True)
 					found = True
 					continue
-		
-		else:
-			oll_sol = []
-			found = True
+	
 		
 		if found == False:
 			tmp_cube.perm('U', True)
