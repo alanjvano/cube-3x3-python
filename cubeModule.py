@@ -82,15 +82,15 @@ class Cube:
 	def inverse(self, p_str):
 		per = self.splitPerm(p_str)
 		inverse = [None]*len(per)
-		print("per", per)
+		#print("per", per)
 		for i in range(len(per),0,-1):
 			# reverse order
-			print(per[i])
+			#print(per[i])
 			inverse[len(per)-i] = copy.deepcopy(per[i-1])
 			# reverse direction
 			inverse[len(per)-i][1] = not (per[i-1][1])
 
-		print('inverse',inverse)
+		#print('inverse',inverse)
 		return inverse
 		
 
@@ -146,6 +146,7 @@ class Cube:
 			if (each[0] in cube_info.valid_perm):
 				self.cube = self.turn(each)
 			else:
+				print("rotation")
 				self.cube = self.rotate(each)
 		
 		return True;
@@ -153,7 +154,7 @@ class Cube:
 
 	def rotate(self, dir):
 		# def buffer cycle to adjust
-		cycle = copy.deepcopy(cube_info.rots[dir[0]])
+		cycle = copy.deepcopy(cube_info.rotations[dir[0]])
 
 		# flip direction if necessary
 		if (dir[1] == 0 and dir[2] == 0):
@@ -163,9 +164,10 @@ class Cube:
 
 		print("rotation cycle", cycle)
 
-		for i in range(0,dir[2]):
-			for each in p:
+		for i in range(0,dir[2]+1):
+			for each in cycle:
 				self.cube = self.turn(each)
+				#print("turning", each)
 				
 		return self.cube
 		

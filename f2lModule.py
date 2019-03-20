@@ -18,80 +18,95 @@ f2l_alg = [
 	['URUrufuF'],['ufuFURUr'],['U2RurfuF'],['RUruRUr'],['RurURur'],['RUruFrfR'],
 	
 	# Case 5: (31-36) corner top layer, edge middle layer
-        ['uRurU2Rur'],['URUrU2RUr'],['U2RurufuF'],['uRUrU2fuFuFrfR'],['RurfU2F'],['RUruRUruRUr'],
+		['uRurU2Rur'],['URUrU2RUr'],['U2RurufuF'],['uRUrU2fuFuFrfR'],['RurfU2F'],['RUruRUruRUr'],
 	
 	# Case 6: (37-41) corner bottom layer, edge middle layer
-        ['RuruRUrU2Rur'],['RUrU2RurURUr'],['fUFU2RUR2FRf'],['RurU2fuF2rfR'],['rFRfRurURurU2Rur']]
+		['RuruRUrU2Rur'],['RUrU2RurURUr'],['fUFU2RUR2FRf'],['RurU2fuF2rfR'],['rFRfRurURurU2Rur']]
 
 # define positions of 47 (corner) and 23 (edge piece) to match with f2l case
 f2l_pos = [
-        # Case 1
-        [20,5],[27,19],[20,1],[27,10],[20,3],[27,37],[20,7],[27,28],
-        # Case 2
-        [20,10],[27,1],[20,37],[27,3],[20,28],[27,7],[20,19],[27,5],
-        # Case 3
-        [8,5],[8,19],[8,1],[8,10],[8,3],[8,37],[8,7],[8,28],
-        # Case 4
-        [47,19],[47,5],[26,19],[33,5],[26,5],[33,19],
-        # Case 5
-        [20,23],[27,23],[20,30],[27,30],[8,30],[8,23],
-        # Case 5
-        [26,23],[33,23],[26,30],[33,30],[47,30]]
+		# Case 1
+		[20,5],[27,19],[20,1],[27,10],[20,3],[27,37],[20,7],[27,28],
+		# Case 2
+		[20,10],[27,1],[20,37],[27,3],[20,28],[27,7],[20,19],[27,5],
+		# Case 3
+		[8,5],[8,19],[8,1],[8,10],[8,3],[8,37],[8,7],[8,28],
+		# Case 4
+		[47,19],[47,5],[26,19],[33,5],[26,5],[33,19],
+		# Case 5
+		[20,23],[27,23],[20,30],[27,30],[8,30],[8,23],
+		# Case 5
+		[26,23],[33,23],[26,30],[33,30],[47,30]]
 
 # for each four corner pairs, find the location of the corresponding edge and corner piece
 # then, based on their location implement the correct f2l algorithm
 # rotate the cube until complete
 def solveF2l(cube_in):
-    tmp_cube = cubeModule.Cube()
-    tmp_cube.cube = copy.deepcopy(cube_in.cube)
+	tmp_cube = cubeModule.Cube()
+	tmp_cube.cube = copy.deepcopy(cube_in.cube)
 	
-    for i in range(4):
-        
-        # set colors for pair based on cube position
-        edge_color = tmp_cube.cube[22]
-        side_color = tmp_cube.cube[31]
-        corner_color = tmp_cube.cube[49]
-        #cross_side1 = tmp_cube.cube[22]
-        #cross_side2 = tmp_cube.cube[31]
-        
-        # find edge piece
-        # first loop through all edge locations
-        for pair in cube_info.edges:
+	for i in range(4):
+		
+		# set colors for pair based on cube position
+		edge_color = tmp_cube.cube[22]
+		side_color = tmp_cube.cube[31]
+		corner_color = tmp_cube.cube[49]
+		#cross_side1 = tmp_cube.cube[22]
+		#cross_side2 = tmp_cube.cube[31]
+		
+		# find edge piece
+		# first loop through all edge locations
+		for pair in cube_info.edges:
 
-            # if both colors are in the edge piece, set it to the current edge position
-            if side_color in [tmp_cube.cube[pair[0]], tmp_cube.cube[pair[1]]]:
-                if edge_color in [tmp_cube.cube[pair[0]], tmp_cube.cube[pair[1]]]:
-                    if edge_color == tmp_cube.cube[pair[0]]:
+			# if both colors are in the edge piece, set it to the current edge position
+			if side_color in [tmp_cube.cube[pair[0]], tmp_cube.cube[pair[1]]]:
+				if edge_color in [tmp_cube.cube[pair[0]], tmp_cube.cube[pair[1]]]:
+					if edge_color == tmp_cube.cube[pair[0]]:
 						edge_pos = pair[0]
-                    else:
+					else:
 						edge_pos = pair[1]
 		
-		print(edge_pos)
+		# find corner piece
 
-        for triple in cube_info.corners:
+		for triple in cube_info.corners:
 
-            # define temporary corner triple
-            tmp_triple = []
-            for j in range(len(triple)):
-                tmp_triple.append(tmp_cube.cube[triple[j]])     
+			# define temporary corner triple
+			tmp_triple = []
+			for j in range(len(triple)):
+				tmp_triple.append(tmp_cube.cube[triple[j]]) 
+			
+			#print("tmp_triple",tmp_triple)
 
-            if edge_color in tmp_triple:
-                if side_color in tmp_triple:
-                    if corner_color in tmp_triple:
-                        for color in tmp_triple:
+			if edge_color in tmp_triple:
+				#print("color1",edge_color)
+				if side_color in tmp_triple:
+					#print("color2",side_color)
+					if corner_color in tmp_triple:
+						#print("color3",corner_color)
+						for color in tmp_triple:
 
-                            # if all three colors of corner are in corner piece, set it to the current corner position
-                            if color == corner_color:
-                                corner_pos = triple.index(corner_color)
+							# if all three colors of corner are in corner piece, set it to the current corner position
+							if color == corner_color:
+								#print("match color",color)
+								
+								corner_pos = triple[tmp_triple.index(corner_color)]
 
-        print("edge_pos",edge_pos,"corner_pos",corner_pos)
-                    
+		print("edge_pos",edge_pos,"corner_pos",corner_pos)
 
-        # find corner piece
+		# check to see if corner is in right position (front right column)
+		if corner_pos not in [47, 26, 33, 20, 27, 8]:
+			print("corner not in correct position")
+			
+		# check to see if edge is in right position (top layer or front right position)
+		if edge_pos not in [23, 30, 1, 3, 5, 7, 10, 19, 28, 37]:
+			print("edge not in correct position")
+			
+		
+		# rotate cube to next position
+		#tmp_cube.show()
+		tmp_cube.perm('Y')
 
-        # permutate with corresponding algorithm
+	   
 
-       
-
-    
-    
+	
+	
