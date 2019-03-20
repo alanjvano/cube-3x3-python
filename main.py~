@@ -3,7 +3,6 @@ import cubeModule
 import crossModule
 import cube_info
 import crossBruteForce
-import f2lModule
 
 def main():
 	cube1 = cubeModule.Cube();
@@ -46,7 +45,7 @@ def main():
 			cross_sol = crossBruteForce.forceCross(cube1)
 			print
 			print("cross:", cross_sol)
-			f2l_sol = f2lModule.solveF2l(cube1)
+                        f2lmodule.solvef2l(cube1)
 		
 		elif (sel == 3):
 			scr_length = input("enter scramble length: ")

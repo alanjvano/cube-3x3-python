@@ -12,6 +12,10 @@ poss_turn = ['u','l','f','r','b','d',
 			'u2','l2','f2','r2','b2','d2']
 			
 def forceCross(cube_in):
+	
+	if checkCross(cube_in.cube):
+		return []
+	
 	start_time = time.time()
 	cube2 = cubeModule.Cube()
 	orig = cubeModule.Cube()
@@ -33,7 +37,6 @@ def forceCross(cube_in):
 				return iteration[k]
 			
 def checkCross(cube):
-	slve = True;
 	for i in [46, 48, 50, 52]:
 		if cube[i] != 5:
 			return False
