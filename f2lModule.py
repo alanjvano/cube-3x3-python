@@ -137,7 +137,7 @@ def solveF2l(cube_in):
 					#print("pos", f2l_pos[pos])
 					if corner_pos == f2l_pos[pos][0] and edge_pos == f2l_pos[pos][1]:
 						print("found algorithm", pos)
-						#print(f2l_alg[pos])
+						print(f2l_alg[pos])
 						tmp_cube.perm(f2l_alg[pos], True)
 						found = True
 
@@ -156,10 +156,13 @@ def solveF2l(cube_in):
 		tmp_cube.perm('Y', True)
 		print("\n\n")
 		
+	print("done")
+	
 	if tmp_cube.sol == ['Y','Y','Y','Y']:
 		tmp_cube.sol = []
 	
 	#print("f2l:",tmp_cube.sol)
+	print(tmp_cube.sol)
 	return tmp_cube.sol, tmp_cube
 
 def findCornerPos(tmp_cube, edge_color, side_color, corner_color):

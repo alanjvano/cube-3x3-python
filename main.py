@@ -71,10 +71,10 @@ def main():
 				auf_sol.append('U')
 			
 			print("\n\nSolution:")
-			print("cross:", cross_sol)
-			print("f2l:", f2l_sol)
-			print("oll:", oll_sol)
-			print("pll:",pll_sol)
+			print("cross:", ''.join(cross_sol))
+			print("f2l:", ''.join(f2l_sol))
+			print("oll:", ''.join(oll_sol))
+			print("pll:",''.join(pll_sol))
 			#print("auf:", auf_sol)
 			#print("solution",solved_cube.sl)
 			
