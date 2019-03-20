@@ -2,6 +2,7 @@ cols = 12
 rows = 9
 gridSize = 60
 valid_perm = ["u","l","f","r","b","d","m","e","s"]
+valid_perm_scr = ["u","l","f","r","b","d"]
 valid_rot = ["x","y","z"]
 
 # define permutation cycles for face turns

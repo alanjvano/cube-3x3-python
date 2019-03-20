@@ -33,7 +33,7 @@ class Cube:
 	
 	def scramble(self, scr_len):
 		# randomly select face permutation from valid list
-		valid = copy.deepcopy(cube_info.valid_perm)
+		valid = copy.deepcopy(cube_info.valid_perm_scr)
 		scr = []
 		
 		for i in range(0, scr_len):
@@ -45,7 +45,7 @@ class Cube:
 			
 			# choose random valid permutation and add to permutation list
 			tmp = math.floor(random.random()*(len(valid)))
-			print("random", tmp)
+			#print("random", tmp)
 			scr.append(valid[tmp])
 			prev = valid[tmp]	
 
@@ -59,7 +59,7 @@ class Cube:
 				scr[len(scr)-1] = scr[len(scr)-1].lower()
 
 			# reset permutaion list
-			valid = copy.deepcopy(cube_info.valid_perm)
+			valid = copy.deepcopy(cube_info.valid_perm_scr)
 			#print(valid)
 
 		scr = ''.join(scr)
