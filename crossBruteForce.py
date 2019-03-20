@@ -30,7 +30,7 @@ def forceCross(cube_in):
 		for k in range(len(iteration)):
 			cube2.cube = copy.deepcopy(orig.cube)
 			#print(iteration[k])
-			cube2.perm(iteration[k])
+			cube2.perm(iteration[k], False)
 			#print(cube_in.checkState())
 			if checkCross(cube2.cube):
 				print("--- %s seconds ---" % (time.time() - start_time))

@@ -124,7 +124,10 @@ class Cube:
 		return p
 		
 		
-	def perm(self, p_str):
+	def perm(self, p_str, solution_append):
+	
+		if solution_append:
+			self.sol.append(p_str)
 	
 		p = self.splitPerm(p_str)
 		
