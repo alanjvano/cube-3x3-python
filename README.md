@@ -11,11 +11,13 @@ The purpose of this project is to develop an algorithm to manipulate and solve a
 	* reset cube
 	* scramble cube
 
-[IN PROGRESS]
+
 
 ### 2. Solve cube using simple method.
 	* efficiency and speed not goal here
 	* given any random scramble, find permuation sequence which will return cube to solved state
+
+[IN PROGRESS]
 
 ### 3. Optimize solving method
 	* modify basic case to emulate Friedrich's Method (CFOP)
@@ -83,17 +85,33 @@ The Cube class is used to define a cube as an object.  This class handle basic c
 ## Simple Solution:
 
 The first step of the simple solution is to solve the bottom cross.
-So the locations of the chosen cross edges (based on which color is chosen) are first found - the targets.
-Then, the corresponding edges for each target position are found using their correspnding pairs - the current positions.
+Originally, each cross piece's location and its corresponding target location where determined.  Then the the position of the edge piece was matched to a certain 
+case where it could be solved most efficiently.
 
-Basically, while the current positions and the target positions of the edges do not match, the program will loop through them and solve them one at a time.
-For each edge piece, there are three possible cases:
-1. The edge is located on the bottom slice
-2. The edge is located on the middle slice
-3. The edge is located on the upper slice
+However, every cross on a rubiks cube can be solved in 8 moved or less, while most cross can be solved in 5 or 6 moves (around 5.5 moves on average).  Therefore,
+the new plan to solved the cross involved simple brute forcing all the possible permutations up to eight moves.  This worked well for cases that were five moves or less.
+However, if the cross was a seven or eight moves case, with up to 18^8 possible difference cases to permutate and then check, this seemed very inefficient.
+
+The current implementation involves a modification to the brute force method.  Now, the all the possible permutations up to five are iterated throug on the cube.
+However, each time a single cross piece is found to be positioned correctly, that piece is fixed in place and all permutation which would affect that piece are removed from
+the list of possible permutations, and then the process will repeat itself.  If the cube get stuck in the case where the last edge or two is positioned incorrectly and cannot
+be solved with the available moves, its position on the top layer is switched.
+
+To solve the first two layers of the cube (F2L), four pairs each consisting of an edge piece and corner piece must be solved.  In this program, these pairs are solved one at a 
+time.  The program will first locate the positions of the edge and corner piece for the front right pair.  It will then reposition them so the corner is in the front right column and 
+the edge is either on the top slice or front right column.  Then it will rotate through the top layer until its pattern matches one of 46 possible f2l cases.  After implementing
+the appropriate algorithm the cube will rotate in the Y direction and repeat the process until all four pairs are solved.
+
+The last two steps of solving the cube, OLL (orient last layer) and PLL (permutate last layer), were the most straitforward to implement.  There exist 57 possible OLL cases
+and 21 possible PLL cases.  Therefore, for each step, the top layer is rotated until it matches on the OLL/PLL cases and then the appropriate algorithm is used.  
+Given the widespread use of OLL and PLL in speed cubing, there already exits databases of the most efficient possible permutations to solve each case.  The algorithms
+used here were found here:
+[OLL Algorithms](https://www.speedsolving.com/wiki/index.php/OLL)
+[PLL Algorithms](https://www.speedsolving.com/wiki/index.php/PLL)
 
 
-
+There exist many ways to improve the efficiency and decrease the average moves per solve.  Currently, the cross solving algorithm has much room for improvement and by implementing
+a dynamic method, perhaps the ideal solution could be found in each case.
 
 
 

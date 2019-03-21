@@ -64,6 +64,7 @@ def solveOLL(cube_in):
 	top_color = tmp_cube.cube[4]
 	while found == False:
 		
+		tmp_cube.show()
 		orient = []
 		for i in [0,1,2,3,4,5,6,7,8,9,10,11,18,19,20,27,28,29,36,37,38]:
 			if tmp_cube.cube[i] == top_color:
@@ -81,7 +82,7 @@ def solveOLL(cube_in):
 						count += 1
 				if count == 9:
 					oll_sol = oll_alg[pattern]
-					print("success")
+					#print("success")
 					tmp_cube.perm(oll_alg[pattern], True)
 					found = True
 					continue
@@ -90,12 +91,11 @@ def solveOLL(cube_in):
 			oll_sol = []
 			found = True
 			
-		print(found)
+		#print(found)
 		
 		if found == False:
 			tmp_cube.perm('U', True)
 		
-	print("done 2")
 	return tmp_cube.sol, tmp_cube
 		
 		
