@@ -114,7 +114,7 @@ class Cube:
 			# and increment counter
 			
 			else:
-				p.append([p_str[i].lower(), 1, 1])
+				p.append([p_str[i].lower(), True, 1])
 				i += 1
 			
 			i += 1
@@ -179,6 +179,8 @@ class Cube:
 		current = copy.deepcopy(self.cube)	
 		buffer = copy.deepcopy(current)
 		cycle = copy.deepcopy(perms[dir[0]])	# choose permutation cycle
+		
+		#print(dir)
 
 		# for clockwise direction reverse permutation cycles
 		if dir[1] == True:

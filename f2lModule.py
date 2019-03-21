@@ -120,7 +120,7 @@ def solveF2l(cube_in):
 			print("edge fixed")
 			#tmp_cube.show()
 			
-		print("edge_pos",edge_pos,"corner_pos",corner_pos)
+		#print("edge_pos",edge_pos,"corner_pos",corner_pos)
 			
 		# permutate cube with correct f2l algorithm based on corner and edge position
 		# if pair not already solved

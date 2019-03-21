@@ -37,6 +37,9 @@ corners = [[0,9,38],[2,29,36],[8,20,27],[6,11,18], #top slice
 # define opposite faces
 faces = [[0,5],[1,3],[2,4]]
 
+# for multiprocessing
+found_cross = False
+
 # define solved state
 solved = [None]*54
 for i in range(6):

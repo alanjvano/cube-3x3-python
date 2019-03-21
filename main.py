@@ -1,17 +1,24 @@
+# Alan Van Omen 3/20/19
+# See README for detailed description
+
 # cube methods
 import cubeModule
 import crossModule
 import cube_info
+import crossOptimizedModule
 import crossBruteForce
 import f2lModule
 import ollModule
 import pllModule
 
+#from multiprocessing import Pool
 import copy
 
 def main():
 	cube1 = cubeModule.Cube();
 	exit = False;
+	
+	procs = []
 	
 	while (exit == False):
 		print("\n\nMenu:")
@@ -52,24 +59,35 @@ def main():
 			solved_cube = copy.deepcopy(cube1)
 			
 			# solve cross
+			print("solving cross")
+			
+			# if cross more than 5 solves, too long
 			cross_sol = crossBruteForce.forceCross(cube1)
-			solved_cube.perm(cross_sol, True)
+			try: 
+				solved_cube.perm(cross_sol, True)
+			except:
+				print("try different scramble with shorter cross solution")
+				continue
 			
 			# solve f2l
+			print("solving f2l")
 			f2l_sol, solved_cube = f2lModule.solveF2l(solved_cube)
 			
 			# solve OLL
+			print("solving OLL")
 			oll_sol, solved_cube = ollModule.solveOLL(solved_cube)
 			
 			# solve PLL
+			print("solving PLL")
 			pll_sol, solved_cube = pllModule.solvePLL(solved_cube)
 			
 			# adjust the last layer to the correct position (auf)
 			auf_sol = []
-			while solved_cube.checkState() == False:
-				solved_cube.perm('U', True)
-				auf_sol.append('U')
-			
+			#while solved_cube.checkState() == False:
+				# solved_cube.perm('U', True)
+				# auf_sol.append('U')
+		
+			solved_cube.show()
 			print("\n\nSolution:")
 			print("cross:", ''.join(cross_sol))
 			print("f2l:", ''.join(f2l_sol))

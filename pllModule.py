@@ -71,7 +71,7 @@ def solvePLL(cube_in):
 					each_color = []
 					for j in range(len(each)):
 						each_color.append(tmp_cube.cube[each[j]])
-					print(each_color)
+					#print(each_color)
 					
 					# check if all elements are equal
 					if each_color.count(each_color[0]) == len(each_color):
@@ -79,10 +79,10 @@ def solvePLL(cube_in):
 				
 				# see if its a match
 				if count == 4:
-					print("success")
-					print(pll_pos[index])
+					#print("success")
+					#print(pll_pos[index])
 					tmp_cube.perm(pll_alg[index], True)
-					print(pll_alg[index])
+					#print(pll_alg[index])
 					found = True
 					continue
 	
@@ -91,7 +91,7 @@ def solvePLL(cube_in):
 		if found == False:
 			tmp_cube.perm('U', True)
 		
-	print("done 3")
+	#print("done 3")
 	return tmp_cube.sol, tmp_cube
 		
 		

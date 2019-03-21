@@ -64,12 +64,12 @@ def solveOLL(cube_in):
 	top_color = tmp_cube.cube[4]
 	while found == False:
 		
-		tmp_cube.show()
+		#tmp_cube.show()
 		orient = []
 		for i in [0,1,2,3,4,5,6,7,8,9,10,11,18,19,20,27,28,29,36,37,38]:
 			if tmp_cube.cube[i] == top_color:
 				orient.append(i)
-		print("orient",orient)
+		#print("orient",orient)
 		
 		# first check if already solved
 		if orient != [0,1,2,3,4,5,6,7,8]:
